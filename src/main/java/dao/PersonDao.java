@@ -13,8 +13,4 @@ public interface PersonDao {
     }
 
 
-
-
-
-
 }
