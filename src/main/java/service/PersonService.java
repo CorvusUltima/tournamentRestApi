@@ -4,6 +4,8 @@ package service;
 import dao.PersonDao;
 import model.Person;
 
+import java.util.List;
+
 public class PersonService {
 
 private final PersonDao personDao;
@@ -18,7 +20,10 @@ public PersonService(PersonDao personDao)
         return personDao.insertPerson(person);
     }
 
+  public List<Person>getAllPeople(){
 
+    return personDao.selectAllPeople();
+  }
 
 
 }

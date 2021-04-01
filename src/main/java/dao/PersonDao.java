@@ -2,6 +2,7 @@ package dao;
 
 import model.Person;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface PersonDao {
@@ -11,6 +12,6 @@ public interface PersonDao {
         UUID id=UUID.randomUUID();
         return insertPerson(id,person);
     }
-
+List<Person> selectAllPeople();
 
 }
