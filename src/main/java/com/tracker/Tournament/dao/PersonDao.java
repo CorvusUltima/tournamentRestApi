@@ -1,6 +1,6 @@
-package dao;
+package com.tracker.Tournament.dao;
 
-import model.Person;
+import com.tracker.Tournament.model.Person;
 
 import java.util.List;
 import java.util.UUID;

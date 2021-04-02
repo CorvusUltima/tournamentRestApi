@@ -1,11 +1,13 @@
-package dao;
+package com.tracker.Tournament.dao;
 
-import model.Person;
+import com.tracker.Tournament.model.Person;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Repository
 public class FakePersonAccessService implements  PersonDao{
 
 

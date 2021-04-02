@@ -1,4 +1,4 @@
-package model;
+package com.tracker.Tournament.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

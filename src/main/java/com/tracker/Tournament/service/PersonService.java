@@ -1,11 +1,12 @@
-package service;
+package com.tracker.Tournament.service;
 
 
-import dao.PersonDao;
-import model.Person;
+import com.tracker.Tournament.dao.PersonDao;
+import com.tracker.Tournament.model.Person;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PersonService {
 
 private final PersonDao personDao;
