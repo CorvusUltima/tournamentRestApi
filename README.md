@@ -32,13 +32,4 @@ To run this project, install it locally using GitHub link URL ;
 
 ## Info
 
- *   [MovieTitleGame.Java](src/MoveTitleGame.java).
- 
- *   [Movies.Java](src/Movies.java).
- 
-  *   [Player.Java](src/Player.java).
-  
-  *   [rng.Java](src/rng.java).
-
-
-  *   [Write.Java](src/Write.java).
+more info to be addet 
