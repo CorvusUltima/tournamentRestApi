@@ -9,8 +9,7 @@ public class Team {
     @NotBlank
     private final String name ;
 
-
-    private List<Person> TeamMember = new ArrayList<>();
+    public List<Person> TeamMembers = new ArrayList<>();
 
 
     public Team(@NotBlank String name) {
@@ -21,8 +20,8 @@ public class Team {
         return name;
     }
 
-    public List<Person> getTeamMember() {
-        return TeamMember;
+    public List<Person> getTeamMembers() {
+        return TeamMembers;
     }
 
 }

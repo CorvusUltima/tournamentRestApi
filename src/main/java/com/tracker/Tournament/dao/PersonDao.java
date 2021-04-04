@@ -13,7 +13,8 @@ public interface PersonDao {
         UUID id=UUID.randomUUID();
         return insertPerson(id,person);
     }
-List<Person> selectAllPeople();
+
+    List<Person> selectAllPeople();
 
     Optional<Person> selectPersonByID(UUID id);
 

@@ -7,6 +7,7 @@ import java.util.UUID;
 public class Person {
 
     private final UUID id ;
+
     @NotBlank
     private final String name ;
 
