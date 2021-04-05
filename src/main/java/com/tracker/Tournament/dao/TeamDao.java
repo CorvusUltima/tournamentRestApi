@@ -13,7 +13,7 @@ public interface TeamDao {
     Optional<Team> selectTeamByName(String name);
     List<Team> selectAllTeams();
 
-    int insertTeamByName(String name );
+    int insertTeam(Team team );
     int deleteTeamByName(String name );
 
 

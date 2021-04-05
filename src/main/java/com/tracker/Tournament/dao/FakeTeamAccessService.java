@@ -2,11 +2,14 @@ package com.tracker.Tournament.dao;
 
 import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+@Repository("fakeTeam")
 
 public class FakeTeamAccessService implements TeamDao{
 
@@ -25,8 +28,8 @@ public class FakeTeamAccessService implements TeamDao{
     }
 
     @Override
-    public int insertTeamByName(String teamName) {
-        DB_Teams.add(new Team(teamName));
+    public int insertTeam(Team team) {
+        DB_Teams.add(new Team(team.getName()));
         return 1;
     }
     @Override
