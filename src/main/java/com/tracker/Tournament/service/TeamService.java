@@ -41,5 +41,11 @@ public class TeamService {
         return teamDao.deleteTeamByName(name);
     }
 
+    public void AddTeamMemberById(String teamName,Person person,UUID id)
+    {
+        teamDao.insertTeamMemberById(teamName,person,id);
+    }
+
+
 
 }

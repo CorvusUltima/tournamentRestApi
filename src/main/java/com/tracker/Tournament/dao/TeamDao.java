@@ -15,7 +15,7 @@ public interface TeamDao {
 
     int insertTeam(Team team );
     int deleteTeamByName(String name );
-
+    int insertTeamMemberById(String teamName,Person person,UUID id);
 
 
 

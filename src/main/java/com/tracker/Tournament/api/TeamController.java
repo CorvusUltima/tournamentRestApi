@@ -47,6 +47,11 @@ public class TeamController {
          teamService.deleteTeamByName(name);
     }
 
+    @PutMapping(path= {"{name}", "{id}"})
+    public void addTeamMemberByName(@PathVariable("name")String teamName,@PathVariable("id")UUID id ,@RequestBody Person personToAdd)
+    {
+        teamService.AddTeamMemberById(teamName,personToAdd,id);
+    }
 
 
 }
