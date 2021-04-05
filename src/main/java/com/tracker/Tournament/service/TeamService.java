@@ -36,4 +36,10 @@ public class TeamService {
     }
 
 
+    public int deleteTeamByName(String  name)
+    {
+        return teamDao.deleteTeamByName(name);
+    }
+
+
 }
