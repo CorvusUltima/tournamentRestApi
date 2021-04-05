@@ -12,6 +12,7 @@ import java.util.UUID;
 
 @RequestMapping(value= "api/v1/team")
 @RestController
+
 public class TeamController {
 
     private final TeamService teamService;
