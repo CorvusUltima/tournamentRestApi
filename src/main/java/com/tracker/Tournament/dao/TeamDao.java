@@ -5,7 +5,6 @@ import com.tracker.Tournament.model.Team;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface TeamDao {
 
@@ -15,7 +14,7 @@ public interface TeamDao {
 
     int insertTeam(Team team );
     int deleteTeamByName(String name );
-    int insertTeamMemberById(String teamName,Person person,UUID id);
+    int insertTeamMemberByName(String teamName,  String personName);
 
 
 

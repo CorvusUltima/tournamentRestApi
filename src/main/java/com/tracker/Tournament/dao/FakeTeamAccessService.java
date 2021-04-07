@@ -2,12 +2,12 @@ package com.tracker.Tournament.dao;
 
 import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository("fakeTeam")
 
@@ -34,27 +34,26 @@ public class FakeTeamAccessService implements TeamDao{
         return 1;
     }
 
+
+
     public Team getTeamByName(String teamName) {
-        for (int i = 0; i < DB_Teams.size(); i++) {
+       int teamNumber=0;
+        for (int i = 0; i < DB_Teams.size(); i++)
+        {
             if (DB_Teams.get(i).getName().equals(teamName)) {
-                return DB_Teams.get(i);
+               teamNumber=i;
+               break;
             }
 
         }
-        return null;
+        return DB_Teams.get(teamNumber);
     }
 
 
 
-    public int insertTeamMemberById(String teamName,Person person,UUID id)
+    public int insertTeamMemberByName(String teamName, String personName)
     {
-
-        Optional<Person>personMaybe=fakePersonAccessService.selectPersonByID(id);
-        if (personMaybe.isEmpty())
-        {
-            return 0;
-        }
-        getTeamByName(teamName).TeamMembers.add(personMaybe.get());
+       getTeamByName(teamName).TeamMembers.add(fakePersonAccessService.selectPersonByName(personName));
         return 1 ;
     }
 
@@ -65,6 +64,7 @@ public class FakeTeamAccessService implements TeamDao{
         {
             return 0;
         }
+
         DB_Teams.remove(teamMaybe.get());
         return 1 ;
     }

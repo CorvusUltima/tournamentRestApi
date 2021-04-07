@@ -1,13 +1,14 @@
 package com.tracker.Tournament.api;
 
-import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
+import com.tracker.Tournament.service.PersonService;
 import com.tracker.Tournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 
 @RequestMapping(value= "api/v1/team")
@@ -16,15 +17,16 @@ import java.util.UUID;
 public class TeamController {
 
     private final TeamService teamService;
+    private final PersonService personService;
 
     @Autowired
-    public TeamController(TeamService teamService) {
+    public TeamController(TeamService teamService, PersonService personService) {
         this.teamService = teamService;
-
+        this.personService = personService;
     }
 
     @PostMapping
-    public void addTeam(@RequestBody Team team)
+    public void addTeam(@Valid @NonNull @RequestBody Team team)
     {
        teamService.addTeam(team);
     }
@@ -47,11 +49,11 @@ public class TeamController {
          teamService.deleteTeamByName(name);
     }
 
-    @PutMapping(path= {"{name}", "{id}"})
-    public void addTeamMemberByName(@PathVariable("name")String teamName,@PathVariable("id")UUID id ,@RequestBody Person personToAdd)
-    {
-        teamService.AddTeamMemberById(teamName,personToAdd,id);
-    }
 
+    @PutMapping(value="/{teamName}/{personName}")
+    public void addTeamMemberByName(@PathVariable String teamName, @PathVariable String personName )
+    {
+        teamService.AddTeamMemberByName(teamName,personName);
+    }
 
 }

@@ -35,6 +35,20 @@ public class FakePersonAccessService implements  PersonDao{
                .findFirst();
     }
 
+    public Person selectPersonByName(String personName)
+    {
+        int PersonNumber=0;
+        for (int i = 0; i < DB.size(); i++)
+        {
+            if (DB.get(i).getName().equals(personName)) {
+                PersonNumber=i;
+                break;
+            }
+
+        }
+        return DB.get(PersonNumber);
+    }
+
 
     @Override
     public int deletePersonByID(UUID id) {
