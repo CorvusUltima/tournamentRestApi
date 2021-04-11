@@ -11,22 +11,20 @@ import java.util.UUID;
 
 public class Person {
     @Id
-
     @SequenceGenerator(
             name="person_sequence",
             sequenceName ="person_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
-
             strategy=GenerationType.SEQUENCE ,
             generator="person_sequence"
     )
 
     private final UUID id ;
-
     @NotBlank
     private final String name ;
+
 
 
     public Person(@JsonProperty("id") UUID id,
