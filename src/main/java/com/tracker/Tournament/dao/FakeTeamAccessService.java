@@ -51,9 +51,9 @@ public class FakeTeamAccessService implements TeamDao{
 
 
 
-    public int insertTeamMemberByName(String teamName, String personName)
+    public int insertTeamMemberByName(String teamName,String  personFirst_name)
     {
-       getTeamByName(teamName).TeamMembers.add(fakePersonAccessService.selectPersonByName(personName));
+       getTeamByName(teamName).TeamMembers.add(fakePersonAccessService.selectPersonByFirst_Name(personFirst_name));
         return 1 ;
     }
 

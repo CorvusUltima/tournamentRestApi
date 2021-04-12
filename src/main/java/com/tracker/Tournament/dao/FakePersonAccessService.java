@@ -1,7 +1,6 @@
 package com.tracker.Tournament.dao;
 
 import com.tracker.Tournament.model.Person;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class FakePersonAccessService implements  PersonDao{
     @Override
     public int insertPerson(UUID id, Person person)
     {
-        DB.add(new Person(id,person.getName()));
+        DB.add(new Person(id,person.getFirst_name(), person.getLast_name(), person.getEmail()));
         return 1;
     }
 
@@ -36,12 +35,12 @@ public class FakePersonAccessService implements  PersonDao{
                .findFirst();
     }
 
-    public Person selectPersonByName(String personName)
+    public Person  selectPersonByFirst_Name(String personFirst_Name)
     {
         int PersonNumber=0;
         for (int i = 0; i < DB.size(); i++)
         {
-            if (DB.get(i).getName().equals(personName)) {
+            if (DB.get(i).getFirst_name().equals(personFirst_Name)) {
                 PersonNumber=i;
                 break;
             }
@@ -69,7 +68,7 @@ public class FakePersonAccessService implements  PersonDao{
                   int indexOfPersonToUpdate=DB.indexOf(person);
 
                   if (indexOfPersonToUpdate>=0){
-                      DB.set(indexOfPersonToUpdate,new Person(id,update.getName()));
+                      DB.set(indexOfPersonToUpdate,new Person(id,update.getFirst_name(),update.getLast_name(),update.getEmail()));
                               return 1;
                     }
                   return 0;

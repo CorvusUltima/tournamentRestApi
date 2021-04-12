@@ -3,17 +3,22 @@ package com.tracker.Tournament.dao;
 import com.tracker.Tournament.model.Person;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository("postgres")
+
 public class PersonDataAccessService implements PersonDao{
+
+    private static List<Person> DB =new ArrayList<>();
 
 
     @Override
     public int insertPerson(UUID id, Person person) {
-        return 0;
+        DB.add(new Person(id,person.getFirst_name(), person.getLast_name(), person.getEmail()));
+        return 1;
     }
 
     @Override
@@ -23,7 +28,7 @@ public class PersonDataAccessService implements PersonDao{
 
     @Override
     public List<Person> selectAllPeople() {
-        return List.of(new Person(UUID.randomUUID(),"FROM POSTGRES DB"));
+        return DB;
     }
 
     @Override
@@ -42,7 +47,9 @@ public class PersonDataAccessService implements PersonDao{
     }
 
     @Override
-    public Person selectPersonByName(String personName) {
+    public Person selectPersonByFirst_Name(String personFirst_Name) {
         return null;
     }
+
+
 }

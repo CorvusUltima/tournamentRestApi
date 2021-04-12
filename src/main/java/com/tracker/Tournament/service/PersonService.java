@@ -36,9 +36,9 @@ public PersonService (@Qualifier("fakeDao") PersonDao personDao)
     return personDao.selectPersonByID(id);
   }
 
-  public Person selectPersonByName(String personName)
+  public Person selectPersonByName(String personFirst_name)
   {
-      return personDao.selectPersonByName( personName);
+      return personDao.selectPersonByFirst_Name( personFirst_name);
   }
 
   public int deletePerson(UUID id){
