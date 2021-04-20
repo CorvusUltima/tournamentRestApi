@@ -24,7 +24,7 @@ public class Person {
     )
 
       private final UUID id ;
-    @NotBlank
+      @NotBlank
       private final String first_name;
       private final String last_name;
       private final String email;
@@ -32,13 +32,25 @@ public class Person {
 
 
     public Person(@JsonProperty("id") UUID id,
-                  @JsonProperty("first_name") String first_name,@JsonProperty("last_name") String last_name, @JsonProperty("last_name")String email) {
+                  @JsonProperty("firstname") String first_name,
+                  @JsonProperty("lastname") String last_name,
+                  @JsonProperty("email")String email) {
 
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+    }
 
+    public Person(
+                  @JsonProperty("firstname") String first_name,
+                  @JsonProperty("lastname") String last_name,
+                  @JsonProperty("email")String email) {
+
+        this.id=UUID.randomUUID();
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
     }
 
 

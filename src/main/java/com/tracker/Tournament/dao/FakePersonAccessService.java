@@ -1,6 +1,10 @@
 package com.tracker.Tournament.dao;
 
 import com.tracker.Tournament.model.Person;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -62,13 +66,13 @@ public class FakePersonAccessService implements  PersonDao{
     }
 
     @Override
-    public int updatePersonById(UUID id, Person update) {
+    public int updatePersonById(UUID id, Person personUpdate) {
         return selectPersonByID(id)
                 .map(person->{
                   int indexOfPersonToUpdate=DB.indexOf(person);
 
                   if (indexOfPersonToUpdate>=0){
-                      DB.set(indexOfPersonToUpdate,new Person(id,update.getFirst_name(),update.getLast_name(),update.getEmail()));
+                      DB.set(indexOfPersonToUpdate,new Person(id,personUpdate.getFirst_name(),personUpdate.getLast_name(),personUpdate.getEmail()));
                               return 1;
                     }
                   return 0;
