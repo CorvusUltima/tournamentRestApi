@@ -22,7 +22,7 @@ public PersonService (@Qualifier("fakeDao") PersonDao personDao)
     this.personDao=personDao;
 }
 
-    public int addPerson(Person person)
+ public int addPerson(Person person)
     {
         return personDao.insertPerson(person);
     }
