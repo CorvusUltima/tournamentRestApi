@@ -9,11 +9,11 @@ import java.util.UUID;
 @Table
 public class Person {
     @Id
+
     @SequenceGenerator(
             name="person_sequence" ,
-            sequenceName="student_sequence",
+            sequenceName="person_sequence",
             allocationSize = 1
-
             )
     @GeneratedValue(
             strategy=GenerationType.SEQUENCE,
@@ -26,7 +26,6 @@ public class Person {
     private final String firstName ;
     private final String lastName;
     private final String email;
-
 
     public Person(@JsonProperty("id") UUID id,
                   @JsonProperty("firstName")  String firstName,
