@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 @Configuration
@@ -22,14 +24,17 @@ public class PersonConfig {
                  1l,
                "mile"    ,
                    "kitic",
-                   "@jahoo.com"
+                   "@jahoo.com",
+                 LocalDate.of(2000, Month.MAY,15)
          ) ;
 
             Person djole=new Person(
                     2l,
                     "Djloe",
                     "Mudic",
-                    "@jahoo.com"
+                    "@jahoo.com",
+                    LocalDate.of(2000, Month.JULY,15)
+
             ) ;
 
             repository.saveAll(

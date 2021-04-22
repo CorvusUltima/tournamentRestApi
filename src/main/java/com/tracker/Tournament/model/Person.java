@@ -1,8 +1,12 @@
 package com.tracker.Tournament.model;
 
+import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +29,9 @@ public class Person {
     private  String firstName ;
     private  String lastName;
     private  String email;
+    private LocalDate dob;
+    @Transient
+    private  Integer age;
 
 
     public Person() {
@@ -34,20 +41,25 @@ public class Person {
     public Person(@JsonProperty("id") Long id,
                   @JsonProperty("firstName")  String firstName,
                   @JsonProperty("lastName")String lastName,
-                  @JsonProperty("email")String email) {
+                  @JsonProperty("email")String email,
+                  @JsonProperty("email")LocalDate dob)
+    {
         this.id = id;
         this.firstName = firstName;
         this.lastName= lastName;
         this.email=email;
+        this.dob=dob;
     }
 
     public Person(@JsonProperty("firstName")String firstName,
                   @JsonProperty("lastName")String lastName,
-                  @JsonProperty("email")String email) {
+                  @JsonProperty("email")String email,
+                  @JsonProperty("email")LocalDate dob) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.dob=dob;
     }
 
     public Long getId() {
@@ -66,8 +78,14 @@ public class Person {
         return email;
     }
 
+    public LocalDate getDob() {
+        return dob;
+    }
 
-
+    public Integer getAge()
+    {
+        return Period.between(this.dob,LocalDate.now()).getYears();
+    }
 
     @Override
     public String toString() {
