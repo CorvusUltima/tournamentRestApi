@@ -24,5 +24,7 @@ public class PersonService {
     }
 
 
-
+    public void addNewPerson(Person person) {
+        System.out.println(person);
+    }
 }

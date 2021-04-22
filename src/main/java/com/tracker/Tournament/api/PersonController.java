@@ -26,6 +26,11 @@ public class PersonController {
        return personService.getAllPeople();
     }
 
+    @PostMapping
+    public void registerNewPerson(@RequestBody Person person)
+    {
+        personService.addNewPerson(person);
+    }
 
 
 }

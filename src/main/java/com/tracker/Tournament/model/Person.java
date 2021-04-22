@@ -38,11 +38,11 @@ public class Person {
 
     }
 
-    public Person(@JsonProperty("id") Long id,
-                  @JsonProperty("firstName")  String firstName,
-                  @JsonProperty("lastName")String lastName,
-                  @JsonProperty("email")String email,
-                  @JsonProperty("email")LocalDate dob)
+    public Person(  @JsonProperty("id")Long id,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("lastName")String lastName,
+                   @JsonProperty("email")String email,
+                   @JsonProperty("dob") LocalDate dob)
     {
         this.id = id;
         this.firstName = firstName;
@@ -51,10 +51,10 @@ public class Person {
         this.dob=dob;
     }
 
-    public Person(@JsonProperty("firstName")String firstName,
+    public Person(@JsonProperty("firstName") String firstName,
                   @JsonProperty("lastName")String lastName,
-                  @JsonProperty("email")String email,
-                  @JsonProperty("email")LocalDate dob) {
+                  @JsonProperty("email") String email,
+                  @JsonProperty("dob") LocalDate dob) {
 
         this.firstName = firstName;
         this.lastName = lastName;
