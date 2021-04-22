@@ -9,7 +9,6 @@ import java.util.UUID;
 @Table
 public class Person {
     @Id
-
     @SequenceGenerator(
             name="person_sequence" ,
             sequenceName="person_sequence",
@@ -22,12 +21,17 @@ public class Person {
 
 
 
-    private final UUID id ;
-    private final String firstName ;
-    private final String lastName;
-    private final String email;
+    private Long id ;
+    private  String firstName ;
+    private  String lastName;
+    private  String email;
 
-    public Person(@JsonProperty("id") UUID id,
+
+    public Person() {
+
+    }
+
+    public Person(@JsonProperty("id") Long id,
                   @JsonProperty("firstName")  String firstName,
                   @JsonProperty("lastName")String lastName,
                   @JsonProperty("email")String email) {
@@ -40,13 +44,13 @@ public class Person {
     public Person(@JsonProperty("firstName")String firstName,
                   @JsonProperty("lastName")String lastName,
                   @JsonProperty("email")String email) {
-        this.id=UUID.randomUUID();
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 

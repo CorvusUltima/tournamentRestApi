@@ -12,26 +12,28 @@ import java.util.List;
 @Configuration
 public class PersonConfig {
 
+
     @Bean
-   CommandLineRunner commandLineRunner (PersonRepository repository)
+   CommandLineRunner commandLineRunner(PersonRepository repository)
     {
-        return args->{
-         Person mile=  new Person (
+        return args->
+        {
+         Person mile= new Person (
+                 1l,
                "mile"    ,
                    "kitic",
                    "@jahoo.com"
-           ) ;
+         ) ;
+
             Person djole=new Person(
-                    "Djloe"    ,
+                    2l,
+                    "Djloe",
                     "Mudic",
                     "@jahoo.com"
             ) ;
 
             repository.saveAll(
-                    List.of(mile,djole)
-            );
-
-
+                    List.of(mile,djole));
         };
     }
 
