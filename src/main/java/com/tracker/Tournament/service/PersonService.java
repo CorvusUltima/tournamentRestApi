@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -25,6 +26,12 @@ public class PersonService {
 
 
     public void addNewPerson(Person person) {
-        System.out.println(person);
+        Optional<Person> personOptional=personRepository.
+                findPersonByEmail(person.getEmail());
+        if(personOptional.isPresent())
+        {
+            throw new IllegalStateException("email taken");
+        }
+        personRepository.save(person);
     }
 }
