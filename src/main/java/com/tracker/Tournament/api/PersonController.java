@@ -7,6 +7,8 @@ import com.tracker.Tournament.service.PersonService;
 
 import java.util.List;
 
+import static com.sun.beans.introspect.PropertyInfo.Name.required;
+
 
 @RequestMapping(path="api/v1/person")
 @RestController
@@ -37,5 +39,18 @@ public class PersonController {
     {
         personService.deletePersonById(personId);
     }
+    @PutMapping(path="{personId}")
+    public void updatePerson(
+          @PathVariable("personID")   Long personId,
+          @RequestParam(required=false) String firstName,
+          @RequestParam(required=false) String lastName,
+          @RequestParam(required=false) String email){
+        personService.updatePerson(personId,firstName,lastName,email);
+    }
+
+
+
+
+
 
 }

@@ -12,6 +12,7 @@ import java.util.UUID;
 @Entity
 @Table
 public class Person {
+
     @Id
     @SequenceGenerator(
             name="person_sequence" ,
@@ -96,4 +97,17 @@ public class Person {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

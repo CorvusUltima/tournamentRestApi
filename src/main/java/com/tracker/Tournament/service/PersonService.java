@@ -6,7 +6,9 @@ import com.tracker.Tournament.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -41,5 +43,27 @@ public class PersonService {
                     +PersonId +" does not exists in DB ");
         }
         personRepository.deleteById(PersonId);
+    }
+    @Transactional
+    public void updatePerson(Long personId, String firstName, String lastName, String email) {
+
+        Person person =personRepository.findById( personId)
+                .orElseThrow(()->new IllegalStateException("person with id"+ personId+"does not exist "));
+
+             if(firstName!=null&& firstName.length()>0&&!Objects.equals(person.getFirstName(),firstName))
+        {
+            person.setFirstName(firstName);
+        }
+
+        if(lastName!=null&& lastName.length()>0&&!Objects.equals(person.getLastName(),lastName))
+        {
+            person.setLastName(lastName);
+        }
+
+        if(email!=null&& email.length()>0&&!Objects.equals(person.getEmail(),email))
+        {
+            person.setEmail(email);
+        }
+
     }
 }
