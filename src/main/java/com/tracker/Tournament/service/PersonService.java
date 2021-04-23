@@ -34,4 +34,8 @@ public class PersonService {
         }
         personRepository.save(person);
     }
+
+    public void deletePersonById(Long PersonId) {
+        personRepository.findById(PersonId);
+    }
 }

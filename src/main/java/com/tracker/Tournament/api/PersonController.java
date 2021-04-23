@@ -32,5 +32,10 @@ public class PersonController {
         personService.addNewPerson(person);
     }
 
+    @DeleteMapping(path="{personId}")
+    public void  deletePersonById(@PathVariable("personId") Long personId)
+    {
+        personService.deletePersonById(personId);
+    }
 
 }
