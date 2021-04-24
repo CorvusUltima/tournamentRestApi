@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import javax.persistence.SequenceGenerator;
 
 public class Team {
 
 
-    @javax.persistence.Id
+
     @SequenceGenerator(
             name="team_sequence" ,
             sequenceName="person_sequence",
@@ -34,8 +34,6 @@ public class Team {
         Id = id;
         this.name = name;
     }
-
-
 
     public Team(  @JsonProperty("name")String name) {
         this.name = name;
