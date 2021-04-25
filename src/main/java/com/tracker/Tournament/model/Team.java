@@ -2,47 +2,58 @@ package com.tracker.Tournament.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class Team {
-
-
-    @javax.persistence.Id
-    @SequenceGenerator(
-            name="team_sequence" ,
-            sequenceName="person_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy= GenerationType.SEQUENCE,
-            generator="team_sequence"
-    )
+@Entity
+@Table
+public class Team   {
 
 
-
-   private Long Id ;
+    @Id
+    @GeneratedValue
+    private Long id ;
     private String name;
+
+
+
+
+    @ManyToMany
+    private List<Person> members;
+
+    public void addPlayer(Person player)
+    {
+     members.add(player);
+    }
+
+
 
     public Team() {
     }
 
+
+
+
     public Team(@JsonProperty("id")Long id,
                 @JsonProperty("name")String name) {
-        Id = id;
+        id = id;
         this.name = name;
     }
 
 
+    public List<Person> getTeamMembers() {
+        return members;
+    }
 
-    public Team(  @JsonProperty("name")String name) {
+    public Team(@JsonProperty("name")String name) {
         this.name = name;
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
@@ -50,7 +61,7 @@ public class Team {
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public void setName(String name) {

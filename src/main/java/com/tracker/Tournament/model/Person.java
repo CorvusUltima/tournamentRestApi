@@ -1,67 +1,56 @@
 package com.tracker.Tournament.model;
-
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-
-import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.UUID;
+import java.util.List;
+
 
 @Entity
 @Table
-public class Person {
-
+public class Person implements Serializable {
     @Id
-    @SequenceGenerator(
-            name="person_sequence" ,
-            sequenceName="person_sequence",
-            allocationSize = 1
-            )
-    @GeneratedValue(
-            strategy=GenerationType.SEQUENCE,
-            generator="person_sequence"
-    )
-
-
-
-    private Long id ;
-    private  String firstName ;
-    private  String lastName;
-    private  String email;
+    @GeneratedValue
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
     private LocalDate dob;
     @Transient
-    private  Integer age;
+    private Integer age;
+
+    @ManyToMany(mappedBy="members")
+    private List<Team> joinedTeams;
 
 
     public Person() {
 
     }
 
-    public Person(  @JsonProperty("id")Long id,
-                   @JsonProperty("firstName") String firstName,
-                   @JsonProperty("lastName")String lastName,
-                   @JsonProperty("email")String email,
-                   @JsonProperty("dob") LocalDate dob)
-    {
+    public Person(@JsonProperty("id") Long id,
+                  @JsonProperty("firstName") String firstName,
+                  @JsonProperty("lastName") String lastName,
+                  @JsonProperty("email") String email,
+                  @JsonProperty("dob") LocalDate dob) {
         this.id = id;
         this.firstName = firstName;
-        this.lastName= lastName;
-        this.email=email;
-        this.dob=dob;
+        this.lastName = lastName;
+        this.email = email;
+        this.dob = dob;
     }
 
     public Person(@JsonProperty("firstName") String firstName,
-                  @JsonProperty("lastName")String lastName,
+                  @JsonProperty("lastName") String lastName,
                   @JsonProperty("email") String email,
                   @JsonProperty("dob") LocalDate dob) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.dob=dob;
+        this.dob = dob;
     }
+
 
     public Long getId() {
         return id;
@@ -83,9 +72,8 @@ public class Person {
         return dob;
     }
 
-    public Integer getAge()
-    {
-        return Period.between(this.dob,LocalDate.now()).getYears();
+    public Integer getAge() {
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     @Override
@@ -110,4 +98,12 @@ public class Person {
         this.email = email;
     }
 
+    public List<Team> getJoinedTeams() {
+        return joinedTeams;
+    }
+
+    void joinTeam(Team team)
+    {
+       joinedTeams.add(team);
+    }
 }
