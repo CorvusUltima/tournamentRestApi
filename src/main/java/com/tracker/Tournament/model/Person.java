@@ -25,7 +25,6 @@ public class Person implements Serializable {
             name = "team_joined",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))
-              Team mile=new Team ();
              private List<Team> teamJoined;
 
 

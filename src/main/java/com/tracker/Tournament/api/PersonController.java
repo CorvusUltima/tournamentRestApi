@@ -45,13 +45,14 @@ public class PersonController {
       return personService.getPersonById(personId).get().getTeamJoined();
     }
 
-
     @PostMapping(path="/{personId}/{teamId}")
    public void  joinTeam(@PathVariable("personId") Long personId,
                          @PathVariable("teamId") Long teamId)
     {
-        personService.getPersonById(personId).get().
-                getTeamJoined().add(teamService.getTeamById(teamId).get());
+        Person person = personService.getPersonById(personId).get();
+        List<Team> teamJoined = person.getTeamJoined();
+        Team team = teamService.getTeamById(teamId).get();
+        teamJoined.add(team);
     }
 
 
