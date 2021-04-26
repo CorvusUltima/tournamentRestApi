@@ -20,8 +20,13 @@ public class Person implements Serializable {
     @Transient
     private Integer age;
 
-    @ManyToMany(mappedBy="members")
-    private List<Team> joinedTeams;
+    @ManyToMany
+    @JoinTable(
+            name = "team_joined",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+              Team mile=new Team ();
+             private List<Team> teamJoined;
 
 
     public Person() {
@@ -98,12 +103,8 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public List<Team> getJoinedTeams() {
-        return joinedTeams;
-    }
 
-    void joinTeam(Team team)
-    {
-       joinedTeams.add(team);
+    public List<Team> getTeamJoined() {
+        return teamJoined;
     }
 }

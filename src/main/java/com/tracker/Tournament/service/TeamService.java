@@ -60,4 +60,10 @@ public class TeamService {
         }
 
     }
+
+    public Optional <Team> getTeamById(Long teamId) {
+
+       return teamRepository.findById(teamId);
+
+    }
 }

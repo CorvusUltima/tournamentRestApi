@@ -71,4 +71,9 @@ public class PersonService {
         }
 
     }
+
+    public Optional<Person> getPersonById(Long personId) {
+
+       return  personRepository.findById(personId);
+    }
 }

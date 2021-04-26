@@ -21,7 +21,7 @@ public class Team   {
 
 
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "teamJoined")
     private List<Person> members;
 
     public void addPlayer(Person player)
