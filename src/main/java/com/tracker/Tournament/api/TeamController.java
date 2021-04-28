@@ -1,12 +1,14 @@
 package com.tracker.Tournament.api;
 
 import com.tracker.Tournament.Repository.TeamRepository;
+import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
 import com.tracker.Tournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(path="api/v1/team")
 @RestController
@@ -23,6 +25,12 @@ public class TeamController {
     public List<Team> getAllTeams()
     {
         return teamService.getAllTeams();
+    }
+
+    @GetMapping(path="{teamId}")
+    public Optional<Team> getTeamById(@PathVariable("teamId") Long teamId)
+    {
+        return teamService.getTeamById(teamId);
     }
 
     @PostMapping
