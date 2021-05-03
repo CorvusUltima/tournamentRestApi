@@ -22,7 +22,11 @@ public class Team   {
 
 
 
-    @ManyToMany(mappedBy = "teamJoined")
+    @ManyToMany
+    @JoinTable(
+            name = "players_joined",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id"))
     private List<Person> members  = new ArrayList();
 
     public void addPlayer(Person player)

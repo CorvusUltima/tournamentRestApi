@@ -21,12 +21,8 @@ public class Person implements Serializable {
     @Transient
     private Integer age;
 
-    @ManyToMany
-    @JoinTable(
-            name = "team_joined",
-            joinColumns = @JoinColumn(name = "person_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-             private List<Team> teamJoined = new ArrayList();
+    @ManyToMany(mappedBy = "members")
+    private List<Team> teamJoined = new ArrayList();
 
 
     public Person() {

@@ -10,7 +10,7 @@ import com.tracker.Tournament.service.PersonService;
 import java.util.List;
 import java.util.Optional;
 
-import static com.sun.beans.introspect.PropertyInfo.Name.required;
+
 
 
 @RequestMapping(path="api/v1/person")
