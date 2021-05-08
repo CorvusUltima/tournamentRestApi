@@ -1,14 +1,13 @@
 package com.tracker.Tournament.api;
 
-import com.tracker.Tournament.Repository.TeamRepository;
-import com.tracker.Tournament.model.Person;
+
 import com.tracker.Tournament.model.Team;
 import com.tracker.Tournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
+
 
 @RequestMapping(path="api/v1/team")
 @RestController
