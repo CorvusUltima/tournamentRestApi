@@ -1,8 +1,6 @@
 package com.tracker.Tournament.service;
 
 import com.tracker.Tournament.Repository.TeamRepository;
-import com.tracker.Tournament.model.Person;
-import com.tracker.Tournament.model.Team;
 import com.tracker.Tournament.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,8 +61,13 @@ public class TeamService  {
     }
 
     public Optional <Team> getTeamById(Long teamId) {
+        boolean exists= teamRepository.existsById(teamId);
+        if(!exists) {
+            throw new IllegalStateException("Team with id"
+                    +teamId +" does not exists in DB ");
+        }
 
-       return teamRepository.findById(teamId);
+       else return teamRepository.findById(teamId);
     }
 
     public Team getOne(Long teamId) {

@@ -73,8 +73,13 @@ public class PersonService {
     }
 
     public Optional<Person> getPersonById(Long personId) {
+        boolean exists= personRepository.existsById(personId);
+        if(!exists) {
+            throw new IllegalStateException("Person with id"
+                    +personId +" does not exists in DB ");
+        }
 
-       return  personRepository.findById(personId);
+       else return  personRepository.findById(personId);
     }
 
     public Person getOne(Long personId) {
