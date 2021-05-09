@@ -1,11 +1,15 @@
 package com.tracker.Tournament.model;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -21,8 +25,9 @@ public class Person implements Serializable {
     @Transient
     private Integer age;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "members")
-    private List<Team> teamJoined = new ArrayList();
+    private Set<Team> teamJoined = new HashSet<>();
 
 
     public Person() {
@@ -100,7 +105,7 @@ public class Person implements Serializable {
     }
 
 
-    public List<Team> getTeamJoined() {
+    public Set<Team> getTeamJoined() {
         return teamJoined;
     }
 }

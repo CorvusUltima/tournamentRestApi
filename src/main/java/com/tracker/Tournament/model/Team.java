@@ -1,13 +1,12 @@
 package com.tracker.Tournament.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
 
 @Entity
 @Table
@@ -20,14 +19,13 @@ public class Team   {
     private String name;
 
 
-
-
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "players_joined",
             joinColumns = @JoinColumn(name = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id"))
-    private List<Person> members  = new ArrayList();
+    private Set<Person> members  = new HashSet<>();
 
     public void addPlayer(Person player)
     {
@@ -49,7 +47,7 @@ public class Team   {
     }
 
 
-    public List<Person> getTeamMembers() {
+    public Set<Person> getTeamMembers() {
         return members;
     }
 
@@ -71,5 +69,10 @@ public class Team   {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addTeamMember(Person person) {
+
+        members.add(person);
     }
 }

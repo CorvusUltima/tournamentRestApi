@@ -1,6 +1,7 @@
 package com.tracker.Tournament.service;
 
 import com.tracker.Tournament.Repository.TeamRepository;
+import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
 import com.tracker.Tournament.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 @Service
-public class TeamService {
+public class TeamService  {
 
     @Autowired
     public TeamService(TeamRepository teamRepository) {
@@ -64,6 +65,13 @@ public class TeamService {
     public Optional <Team> getTeamById(Long teamId) {
 
        return teamRepository.findById(teamId);
+    }
 
+    public Team getOne(Long teamId) {
+        return teamRepository.getOne(teamId);
+    }
+
+    public Team  save(Team team) {
+         return teamRepository.save(team);
     }
 }

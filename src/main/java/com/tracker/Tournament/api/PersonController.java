@@ -9,11 +9,10 @@ import com.tracker.Tournament.service.PersonService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
-
-
-@RequestMapping(path="api/v1/person")
+@RequestMapping(path="/person")
 @RestController
 
 public class PersonController {
@@ -40,33 +39,7 @@ public class PersonController {
         return personService.getPersonById(personId);
     }
 
-    @GetMapping(path="{teamId}/{teamsID}/{nesto}")// person can retrive date from team service
-    public Optional<Team> getTeamById(@PathVariable("teamId") Long teamId)
-    {
-        return teamService.getTeamById(teamId);
-    }
-
-    @GetMapping(path="/{personId}/{teams}")// why is this not working
-    public List<Team> getAllJoinedTeams(@PathVariable("personId") Long personId)
-    {
-        Person person= personService.getPersonById(personId).get();
-        List<Team> teamJoined=person.getTeamJoined();
-        Team team=new Team();
-        teamJoined.add(team);
-        return teamJoined;
-    }
-
-    @PostMapping(path="/{personId}/{teamId}")//why is this not working  ?
-   public void  joinTeam(@PathVariable("personId") Long personId,
-                         @PathVariable("teamId") Long teamId)
-    {
-        Person person = personService.getPersonById(personId).get();
-        List<Team> teamJoined = person.getTeamJoined();
-        Team team = teamService.getTeamById(teamId).get();
-        teamJoined.add(team);
-    }
-
-
+    
     @PostMapping
     public void registerNewPerson(@RequestBody Person person)
     {

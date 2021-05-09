@@ -76,4 +76,8 @@ public class PersonService {
 
        return  personRepository.findById(personId);
     }
+
+    public Person getOne(Long personId) {
+        return personRepository.getOne( personId);
+    }
 }
