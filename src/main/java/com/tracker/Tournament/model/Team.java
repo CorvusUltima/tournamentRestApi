@@ -19,7 +19,7 @@ public class Team   {
     private String name;
 
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name = "players_joined",
@@ -27,10 +27,9 @@ public class Team   {
             inverseJoinColumns = @JoinColumn(name = "person_id"))
     private Set<Person> members  = new HashSet<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "enteredTeams")
     private Set<Tournament> tournamentJoined = new HashSet<>();
-
-
 
 
     public void addPlayer(Person player)
@@ -38,13 +37,8 @@ public class Team   {
      members.add(player);
     }
 
-
-
     public Team() {
     }
-
-
-
 
     public Team(@JsonProperty("id")Long id,
                 @JsonProperty("name")String name) {

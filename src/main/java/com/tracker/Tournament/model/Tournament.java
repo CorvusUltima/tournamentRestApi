@@ -3,6 +3,7 @@ package com.tracker.Tournament.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,6 @@ public class Tournament {
     @GeneratedValue
     private Long id ;
     private String name;
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "teams_joined",
@@ -24,9 +24,13 @@ public class Tournament {
     private Set<Team> enteredTeams = new HashSet<>();
 
 
+   public Tournament()
+   {
 
+   }
 
-    public Tournament(@JsonProperty("id")Long id, @JsonProperty("name")String name) {
+    public Tournament(@JsonProperty("id")Long id,
+                      @JsonProperty("name")String name) {
         this.id = id;
         this.name = name;
     }
@@ -60,7 +64,7 @@ public class Tournament {
         this.enteredTeams = enteredTeams;
     }
 
-    void joinTournament(Team team)
+   public void joinTournament(Team team)
     {
         enteredTeams.add(team);
     }

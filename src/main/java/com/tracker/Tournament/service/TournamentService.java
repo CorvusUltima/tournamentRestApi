@@ -28,7 +28,7 @@ public class TournamentService {
     }
 
 
-    public void addNewTeam(Tournament tournament) {
+    public void addNewTournament(Tournament tournament) {
         Optional<Tournament> teamOptional= tournamentRepository.findTournamentByName
                 (tournament.getName());
         if(teamOptional.isPresent())
