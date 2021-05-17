@@ -1,59 +1,79 @@
 package com.tracker.Tournament.api;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tracker.Tournament.model.Person;
 import com.tracker.Tournament.model.Team;
 import com.tracker.Tournament.service.PersonService;
 import com.tracker.Tournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
-@RequestMapping(value= "api/v1/team")
+@RequestMapping(path="/team")
 @RestController
-
 public class TeamController {
 
     private final TeamService teamService;
     private final PersonService personService;
 
     @Autowired
-    public TeamController(TeamService teamService, PersonService personService) {
-        this.teamService = teamService;
-        this.personService = personService;
-    }
+    public TeamController(TeamService teamService,PersonService personService) {
 
-    @PostMapping
-    public void addTeam(@Valid @NonNull @RequestBody Team team)
-    {
-       teamService.addTeam(team);
+        this.teamService = teamService;
+        this.personService=personService;
     }
 
     @GetMapping
-    public List<Team> getAllTeams(){
+    public List<Team> getAllTeams()
+    {
         return teamService.getAllTeams();
     }
 
-    @GetMapping(path="{name}")
-    public Team getTeamByName(@PathVariable("name") String name)
+    @GetMapping(path="{teamId}")
+    public Optional<Team> getTeamById(@PathVariable("teamId") Long teamId)
     {
-        return teamService.getTeamByName(name)
-                .orElse( null);  // good place to add a message to the client,more inf
+        return teamService.getTeamById(teamId);
     }
 
-    @DeleteMapping(path="{name}")
-    public void deleteTeamByName(@PathVariable("name")String name)
+    @PostMapping
+    public void registerNewTeam(@RequestBody Team team)
     {
-         teamService.deleteTeamByName(name);
+        teamService.addNewTeam(team);
+    }
+
+    @DeleteMapping(path="{teamId}")
+    public void  deleteTeamById(@PathVariable("teamId") Long teamId)
+    {
+        teamService.deleteTeamById(teamId);
+    }
+
+    @PutMapping(path="{teamId}")
+    public void updateTeam
+            (
+            @PathVariable("teamId") Long teamId,
+            @RequestParam(required=false) String name){
+            teamService.updateTeam(teamId, name);
     }
 
 
-    @PutMapping(value="/{teamName}/{personName}")
-    public void addTeamMemberByName(@PathVariable String teamName, @PathVariable String personName )
+    @PutMapping("/{teamId}/person/{personId}")
+        Team joinMemberInTeam(
+           @PathVariable Long teamId,
+           @PathVariable Long personId
+    )
     {
-        teamService.AddTeamMemberByName(teamName,personName);
+        Team team=teamService.getTeamById(teamId).get();
+        Person person = personService.getPersonById(personId).get();
+        team.addTeamMember(person);
+        return teamService.save(team);
     }
+
+
+
+
+
 
 }

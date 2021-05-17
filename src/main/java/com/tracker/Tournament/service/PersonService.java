@@ -1,51 +1,88 @@
 package com.tracker.Tournament.service;
 
 
-import com.tracker.Tournament.dao.PersonDao;
+import com.tracker.Tournament.Repository.PersonRepository;
 import com.tracker.Tournament.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class PersonService {
 
-private final PersonDao personDao;
-
-@Autowired
-public PersonService (@Qualifier("fakeDao") PersonDao personDao)
-{
-    this.personDao=personDao;
-}
-
- public int addPerson(Person person)
-    {
-        return personDao.insertPerson(person);
+   @Autowired
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
-  public List<Person>getAllPeople(){
-    return personDao.selectAllPeople();
-  }
+    private final PersonRepository personRepository;
+
+    public List<Person> getAllPeople()
+    {
+        return personRepository.findAll();
+    }
 
 
-  public Optional<Person> getPersonByID(UUID id){
-    return personDao.selectPersonByID(id);
-  }
+    public void addNewPerson(Person person) {
+        Optional<Person> personOptional=personRepository.
+                findPersonByEmail(person.getEmail());
+        if(personOptional.isPresent())
+        {
+            throw new IllegalStateException("email taken");
+        }
+        personRepository.save(person);
+    }
+    public void deletePersonById(Long PersonId) {
+        boolean exists=personRepository.existsById(PersonId);
+        if(!exists) {
+            throw new IllegalStateException("Person with id"
+                    +PersonId +" does not exists in DB ");
+        }
+        personRepository.deleteById(PersonId);
+    }
+    @Transactional
+    public void updatePerson(Long personId, String firstName, String lastName, String email) {
 
-  public Person selectPersonByName(String personFirst_name)
-  {
-      return personDao.selectPersonByFirst_Name( personFirst_name);
-  }
+        Person person =personRepository.findById( personId)
+                .orElseThrow(()->new IllegalStateException("person with id"+ personId+"does not exist "));
 
-  public int deletePerson(UUID id){
-  return personDao.deletePersonByID(id);
-  }
-  public int updatePerson(UUID id,Person newPerson ) {
-      return personDao.updatePersonById(id,newPerson);
-  }
+             if(firstName!=null&& firstName.length()>0&&!Objects.equals(person.getFirstName(),firstName))
+        {
+            person.setFirstName(firstName);
+        }
 
+        if(lastName!=null&& lastName.length()>0&&!Objects.equals(person.getLastName(),lastName))
+        {
+            person.setLastName(lastName);
+        }
+
+        if(email!=null&& email.length()>0&&!Objects.equals(person.getEmail(),email))
+        {
+            Optional<Person>personOptional=personRepository.findPersonByEmail(email);
+            if(personOptional.isPresent()){
+                throw new IllegalStateException("email take");
+        }
+
+            person.setEmail(email);
+        }
+
+    }
+
+    public Optional<Person> getPersonById(Long personId) {
+        boolean exists= personRepository.existsById(personId);
+        if(!exists) {
+            throw new IllegalStateException("Person with id"
+                    +personId +" does not exists in DB ");
+        }
+
+       else return  personRepository.findById(personId);
+    }
+
+    public Person getOne(Long personId) {
+        return personRepository.getOne( personId);
+    }
 }

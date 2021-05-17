@@ -1,70 +1,64 @@
 package com.tracker.Tournament.api;
 
 import com.tracker.Tournament.model.Person;
-import com.tracker.Tournament.service.PersonService;
+import com.tracker.Tournament.model.Team;
+import com.tracker.Tournament.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
+import com.tracker.Tournament.service.PersonService;
 
-
-import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
+import java.util.Set;
 
-@RequestMapping(value= "api/v1/person")
+
+@RequestMapping(path="/person")
 @RestController
 
 public class PersonController {
 
-    private final PersonService personService;
+    private final PersonService personService ;
+    private TeamService teamService;
 
     @Autowired
-    public PersonController(PersonService personService)
-    {
-        this.personService=personService;
+    public PersonController(PersonService personService, TeamService teamService) {
+        this.personService = personService;
+        this.teamService = teamService;
     }
 
-    @PostMapping
-    public void addPerson(@Valid @RequestBody Person person)
-    {
-        personService.addPerson(person);
-    }
 
     @GetMapping
-    public List<Person> getAllPeople(){
-        return personService.getAllPeople();
-    }
-
-
-   /*  @GetMapping(path="{id}")
-    public Person getPersonByID(@PathVariable("id")UUID id)
+    public List<Person> getAllPeople()
     {
-        return personService.getPersonByID(id)
-                .orElse( null);  // good place to add a message to the client,more inf
+       return personService.getAllPeople();
     }
 
-    */
-
-    @GetMapping(path="{name}")
-   public Person selectPersonByName(@PathVariable("name") String name)
+    @GetMapping(path="{personId}")
+    public Optional<Person> getPersonById(@PathVariable("personId") Long personId)
     {
-        return personService.selectPersonByName(name);
+        return personService.getPersonById(personId);
     }
 
-
-    @DeleteMapping(path="{id}")
-    public void deletePersonById(@PathVariable("id")UUID id)
+    
+    @PostMapping
+    public void registerNewPerson(@RequestBody Person person)
     {
-        personService.deletePerson(id);
+        personService.addNewPerson(person);
     }
 
-
-    @PutMapping(path="{id}")
-    public void updatePerson(@PathVariable("id")UUID id ,@Valid @NonNull @RequestBody Person personToUpdate)
+    @DeleteMapping(path="{personId}")
+    public void  deletePersonById(@PathVariable("personId") Long personId)
     {
-        personService.updatePerson(id,personToUpdate);
+        personService.deletePersonById(personId);
     }
-
+    @PutMapping(path="{personId}")
+    public void updatePerson(
+          @PathVariable("personId")   Long personId,
+          @RequestParam(required=false) String firstName,
+          @RequestParam(required=false) String lastName,
+          @RequestParam(required=false) String email){
+        personService.updatePerson(personId,firstName,lastName,email);
+   }
 
 
 }
